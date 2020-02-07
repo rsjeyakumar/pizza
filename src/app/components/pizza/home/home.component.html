@@ -54,12 +54,13 @@
             <div class="team-front">
             <img src="https://lh5.googleusercontent.com/proxy/cjsJgHEU-2aTD15gZZ161uGwW-uxmZHxTBlBoagNBX-D2WyPHsZ3bZD8cuB-p7qSUNoKi-Xr-xx0dLwTFA8kxbKN5JY8wE-dRFSMVKF0oC-ldxAfOnLv-1c" class="img-fluid" />
             <h3>Veg Pizza</h3>
+            <h3>Category:<strong class="text-primary">Veg</strong></h3>
             <p>&#8377;200</p>
             </div>
             
             <div class="team-back text-center" style="margin-top:30px;">
                 <div class="footer text-center" style="padding-top:5px;">
-                    <a href="#" class="btn btn-primary">Add To Favourite</a>
+                    <a href="javascript:void(0);" (click)="showConfirm();" class="btn btn-primary">Add To Favourite</a>
                 </div>
                 <div class="footer text-center" style="padding-top:5px;">
                     <a href="#" class="btn btn-danger">Add To Card</a>
@@ -238,3 +239,21 @@
             </div>
             </div>
       </section>
+
+      <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
