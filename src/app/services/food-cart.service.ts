@@ -7,9 +7,11 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FoodCartService {
+  apiURL = 'http://13.233.93.227:3306';
   showAlert;
-  loginAPI = 'http://10.117.189.114:8087/homeslice/customers/login';
-  viewAllItemsAPI = 'http://52.66.140.63:8085/foodie/login';
+  loginAPI = `${this.apiURL}/homeslice/customers/login`;
+  viewAllItemsAPI = `${this.apiURL}/homeslice/items`;
+  // addPreferencesAPI = `${this.apiURL}/homeslice/items`;
 
   constructor(private http: HttpClient) {
   }
