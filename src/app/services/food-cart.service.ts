@@ -11,7 +11,7 @@ export class FoodCartService {
   showAlert;
   loginAPI = `${this.apiURL}/homeslice/customers/login`;
   viewAllItemsAPI = `${this.apiURL}/homeslice/items`;
-  // addPreferencesAPI = `${this.apiURL}/homeslice/items`;
+  customersAPI = `${this.apiURL}/homeslice/customers`;
 
   constructor(private http: HttpClient) {
   }
