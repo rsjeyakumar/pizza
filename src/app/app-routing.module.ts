@@ -11,7 +11,7 @@ const routes: Routes = [
     redirectTo: '/login', pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'pizza',
     loadChildren: () => import(`./components/pizza/pizza.module`).then(m => m.PizzaModule),
     canActivate: [AuthGuardService]
   },
