@@ -50,3 +50,31 @@ export interface OrderMenu {
     menuId: number;
     quantity: number;
 }
+
+
+
+/*home slice*/
+export interface ViewItemsRes {
+    statusCode: number;
+    message: string;
+    itemList: ViewItems[];
+}
+
+export interface ViewItems {
+    itemId: number;
+    itemName: string;
+    price: number;
+    favourite: boolean;
+}
+
+
+export interface OrdersReq {
+    totalPrice: number;
+    itemList: OrderItemList[];
+}
+
+
+export interface OrderItemList {
+    itemId: number;
+    quantity: number;
+}

@@ -1,1 +1,43 @@
-<p>cart works!</p>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-2" *ngFor="let cart of cartItems">
+               
+                <div class="card-body">
+                    <div class="pizza-list row">
+                        <div class="col-3">
+                            <img class="img-thumbnail" src="https://images.dominos.co.in/new_peppy_paneer.jpg">
+                            <p> Peppy Paneer</p>
+                        </div>
+                        <div class="col"> <p>Price:</p><p>&#8377; {{cart.price}}</p></div>
+                        <div class="col"><p>Qty</p> <p><span class="incrementer border border-primary px-2">
+                                <a class="px-2" href="javascript:void(0)" *ngIf="cart.quantity!=0"
+                                    (click)="cart.quantity=cart.quantity-1;subTotal()">-</a>
+                                    <!-- <a class="px-2 " href="javascript:void(0)" *ngIf="cart.quantity==0"
+                                    (click)="cart.quantity=cart.quantity+1">Add</a> -->
+                                <span class="px-2 count-val" *ngIf="cart.quantity!=0"> {{cart.quantity}}</span>
+                                <a class="px-2" href="javascript:void(0)" *ngIf="cart.quantity!=0"
+                                    (click)="cart.quantity=cart.quantity+1;subTotal()">+</a>
+                            </span></p></div>
+                        <div class="col"> <span>
+                            <p class="text-right">Amount:</p>
+                               <p class="text-right">&#8377; {{cart.price * cart.quantity}}</p> 
+                            </span></div>
+                            <a href="javascript:void(0)" class="remove_pizza" (click)="removeItem(cart.itemId)">X</a>
+                    </div>
+                </div>
+            </div>
+            <div class="noItem" *ngIf="cartItems.length==0">
+                <p class="text-center text-info">You are not placed order to checkout. Please select your pizza from Dashboard page</p>
+            </div>
+            <div class="col-12" *ngIf="cartItems.length!=0">
+                <h6 class="text-right text-primary">sub Total: &#8377; {{consolidateAmt}}</h6>
+            </div>
+            <div class="col-12 text-right py-3" *ngIf="cartItems.length!=0">
+               <button class="btn btn-success" (click)="placeOrder()">Place Your Order</button>
+            </div>
+          
+        </div>
+    </div>
+
+</div>
