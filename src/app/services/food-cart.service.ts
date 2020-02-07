@@ -7,15 +7,11 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FoodCartService {
+  apiURL = 'http://13.233.93.227:3306';
   showAlert;
-  loginAPI = 'http://52.66.140.63:8085/foodie/login';
-  getAllVendorAPI = 'http://52.66.140.63:8085/foodie/vendors';
-  menuList = 'http://52.66.140.63:8085/foodie/vendors';
-  getMenuItemAPI = 'http://52.66.140.63:8085/foodie/vendors/menu';
-  paymentapi = 'http://52.66.140.63:8085/foodie/customer';
-  myOrdersAPI = 'http://52.66.140.63:8085/foodie/customer';
-  addVendorapi = 'http://52.66.140.63:8085/foodie/admins/menu';
-
+  loginAPI = `${this.apiURL}/homeslice/customers/login`;
+  viewAllItemsAPI = `${this.apiURL}/homeslice/items`;
+  // addPreferencesAPI = `${this.apiURL}/homeslice/items`;
 
   constructor(private http: HttpClient) {
   }
@@ -40,61 +36,18 @@ export class FoodCartService {
     );
   }
 
-   /*
+  /*
   * @param data
-  * Validate Login API
+  * Get All Items
   * POST Method
   * Type Object
   */
- payment(data,customerid): Observable<any> {
-  return this.http.post(this.paymentapi + '/' + customerid + '/orders', data, this.httpOptions).pipe(
+ getAllItems(): Observable<any> {
+  return this.http.get(this.viewAllItemsAPI, this.httpOptions).pipe(
     catchError(this.errorHandler.bind(this))
   );
 }
 
-  /*
-   * @param data
-   * Validate Login API
-   * POST Method
-   * Type Object
-   */
-  getMenuList(vendorid): Observable<any> {
-    return this.http.get(this.menuList + '/' + vendorid, this.httpOptions).pipe(
-      catchError(this.errorHandler.bind(this))
-    );
-  }
-
-  /*
-    * @param data
-    * Get All Vendors
-    * GET Method
-    * Type Object
-    */
-  getAllVendors(): Observable<any> {
-    return this.http.get(this.getAllVendorAPI, this.httpOptions).pipe(
-      catchError(this.errorHandler.bind(this))
-    );
-  }
-
-  
-  /*
-    * @param data
-    * Get All Vendors
-    * GET Method
-    * Type Object
-    */
-   addVendor(data): Observable<any> {
-    return this.http.post(this.addVendorapi,data, this.httpOptions).pipe(
-      catchError(this.errorHandler.bind(this))
-    );
-  }
-
-  getMyOrders(userId): Observable<any> {
-    return this.http.get(this.myOrdersAPI + '/' + userId + '/' + 'orders', this.httpOptions).pipe(
-      catchError(this.errorHandler.bind(this))
-    );
-  }
-  
   /*
      * @param error
      * Error Handling
