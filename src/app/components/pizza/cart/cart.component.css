@@ -1,0 +1,17 @@
+.card.sticky-top{
+    top:100px;
+}
+.count-val{
+    font-size: 18px;
+}
+
+.pizza-list img{
+    /* width: 200px; */
+}
+
+.remove_pizza{
+    position: relative;
+    bottom: 32px;
+    left: 10px;
+    text-decoration: none;;
+}
