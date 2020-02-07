@@ -14,37 +14,8 @@ export class CartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.cartItems = [
-      {
-        itemId: 23,
-        itemName: 'Corn Pizza',
-        price: 200,
-        favourite: true,
-        quantity: 1
-      },
-      {
-        itemId: 55,
-        itemName: 'Panner Pizza',
-        price: 100,
-        favourite: true,
-        quantity: 1
-      }
-      , {
-        itemId: 33,
-        itemName: 'Veg Pizza',
-        price: 500,
-        favourite: true,
-        quantity: 1
-      }, {
-        itemId: 52,
-        itemName: 'Non Veg Pizza',
-        price: 300,
-        favourite: true,
-        quantity: 1
-      }
-    ];
+    this.cartItems = JSON.parse(sessionStorage.getItem('sessionCart'));
     this.subTotal();
-    this.sessionCart = sessionStorage.setItem('sessionCart', JSON.stringify(this.cartItems));
   }
   subTotal() {
     this.consolidateAmt = this.cartItems.reduce(
