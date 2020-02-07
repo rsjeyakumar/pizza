@@ -7,7 +7,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FoodCartService {
-  apiURL = 'http://13.233.93.227:3306';
+  apiURL = 'http://13.233.93.227:8085';
   showAlert;
   loginAPI = `${this.apiURL}/homeslice/customers/login`;
   viewAllItemsAPI = `${this.apiURL}/homeslice/items`;

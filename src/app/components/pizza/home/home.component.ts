@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FoodCartService } from '../../../services/food-cart.service';
 import Swal from 'sweetalert2';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   allItemList;
   favouriteItems = false;
   allItems = true;
+  items;
+  cartItems = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
 
   showConfirm() {
     this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure want to add favourite?', detail:'Confirm to proceed'});
+    this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure want to add favourite?', detail: 'Confirm to proceed' });
   }
   onConfirm() {
     this.messageService.clear('c');
@@ -61,6 +63,28 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.items = [
+      {
+        itemId: 1,
+        itemName: 'Panner Pizza',
+        price: 200,
+        favourite: true,
+        category: 'Non Veg'
+      }
+    ];
   }
+
+
+  addToCart(item) {
+    item.quantity = 1;
+    this.cartItems.push(item);
+    console.log(this.cartItems);
+  }
+  myCart(){
+    sessionStorage.setItem('sessionCart', JSON.stringify(this.cartItems));
+    this.router.navigate(['/pizza/cart']);
+
+  }
+
 
 }
