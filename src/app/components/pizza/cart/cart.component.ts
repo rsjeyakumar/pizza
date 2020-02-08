@@ -43,6 +43,7 @@ export class CartComponent implements OnInit {
     if (obj !== -1) {
       this.cartItems.splice(obj, 1);
       this.subTotal();
+      sessionStorage.setItem('sessionCart', JSON.stringify(this.cartItems));
     }
   }
 

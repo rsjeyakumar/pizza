@@ -57,7 +57,7 @@
         <div class="row">
 
             <!--team-1-->
-            <div class="col-lg-4" *ngFor="let item of items">
+            <div class="col-lg-4" *ngFor="let item of allItemList">
                 <div class="our-team-main">
 
                     <div class="team-front">
@@ -70,7 +70,7 @@
 
                     <div class="team-back text-center" style="margin-top:30px;">
                         <div class="footer text-center" style="padding-top:5px;">
-                            <a href="javascript:void(0);" (click)="showConfirm();" class="btn btn-primary">
+                            <a href="javascript:void(0);" (click)="showConfirm(item.favourite,item.itemId);" class="btn btn-primary">
                                 <span *ngIf="item.favourite">Remove from
                                     Favourite</span>
                                 <span *ngIf="!item.favourite">Add To
@@ -90,102 +90,67 @@
 
 <section style="margin-top:10px;" *ngIf="favouriteItems;">
     <div class="container">
-        <div class="row">
-
-            <!--team-1-->
-            <div class="col-lg-4">
+        <div class="row py-3">
+             <!--team-1-->
+             <h3 class="col-12">Favorities</h3>
+             <div class="col-lg-4" *ngFor="let item of mypreference?.favourites">
                 <div class="our-team-main">
 
                     <div class="team-front">
                         <img src="https://lh5.googleusercontent.com/proxy/cjsJgHEU-2aTD15gZZ161uGwW-uxmZHxTBlBoagNBX-D2WyPHsZ3bZD8cuB-p7qSUNoKi-Xr-xx0dLwTFA8kxbKN5JY8wE-dRFSMVKF0oC-ldxAfOnLv-1c"
                             class="img-fluid" />
-                        <h3>Veg Pizza</h3>
-                        <p>&#8377;200</p>
+                        <h3>{{item.itemName}}</h3>
+                        <h3>Category:<strong class="text-primary">{{item.category}}</strong></h3>
+                        <p>&#8377;{{item.price}}</p>
                     </div>
 
                     <div class="team-back text-center" style="margin-top:30px;">
                         <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-primary">Add To Favourite</a>
+                            <!-- <a href="javascript:void(0);" (click)="showConfirm(item.favourite,item.itemId);" class="btn btn-primary">
+                                <span *ngIf="item.favourite">Remove from
+                                    Favourite</span>
+                                <span *ngIf="!item.favourite">Add To
+                                    Favourite</span></a> -->
                         </div>
                         <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-danger">Add To Card</a>
+                            <button [disabled]="item.quantity" (click)="addToCart(item);" class="btn btn-danger">Add To Card</button>
                         </div>
                     </div>
 
                 </div>
             </div>
             <!--team-1-->
-
-            <!--team-2-->
-            <div class="col-lg-4">
+        </div>
+            <div class="row py-3">
+             <!--team-1-->
+             <h3 class="col-12">Likes</h3>
+             <div class="col-lg-4" *ngFor="let item of mypreference?.likes">
                 <div class="our-team-main">
 
                     <div class="team-front">
-                        <img src="https://uudai.files.wordpress.com/2015/10/pizza-uudai.jpg?w=555&h=424&crop=1"
+                        <img src="https://lh5.googleusercontent.com/proxy/cjsJgHEU-2aTD15gZZ161uGwW-uxmZHxTBlBoagNBX-D2WyPHsZ3bZD8cuB-p7qSUNoKi-Xr-xx0dLwTFA8kxbKN5JY8wE-dRFSMVKF0oC-ldxAfOnLv-1c"
                             class="img-fluid" />
-                        <h3>Chicken Pizza</h3>
-                        <p>&#8377;300</p>
+                        <h3>{{item.itemName}}</h3>
+                        <h3>Category:<strong class="text-primary">{{item.category}}</strong></h3>
+                        <p>&#8377;{{item.price}}</p>
                     </div>
 
                     <div class="team-back text-center" style="margin-top:30px;">
                         <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-primary">Add To Favourite</a>
+                            <!-- <a href="javascript:void(0);" (click)="showConfirm(item.favourite,item.itemId);" class="btn btn-primary">
+                                <span *ngIf="item.favourite">Remove from
+                                    Favourite</span>
+                                <span *ngIf="!item.favourite">Add To
+                                    Favourite</span></a> -->
                         </div>
                         <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-danger">Add To Card</a>
+                            <button [disabled]="item.quantity" (click)="addToCart(item);" class="btn btn-danger">Add To Card</button>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <!--team-2-->
-
-            <!--team-3-->
-            <div class="col-lg-4">
-                <div class="our-team-main">
-
-                    <div class="team-front">
-                        <img src="https://i2.wp.com/www.vegrecipesofindia.com/wp-content/uploads/2014/01/veg-grilled-sandwich-recipe-1-500x375.jpg"
-                            class="img-fluid" />
-                        <h3>Corn Pizza</h3>
-                        <p>&#8377;150</p>
-                    </div>
-
-                    <div class="team-back text-center" style="margin-top:30px;">
-                        <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-primary">Add To Favourite</a>
-                        </div>
-                        <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-danger">Add To Card</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!--team-3-->
-
-            <!--team-4-->
-            <div class="col-lg-4">
-                <div class="our-team-main">
-
-                    <div class="team-front">
-                        <img src="https://vaya.in/recipes/wp-content/uploads/2018/06/Club-sandwich.jpg"
-                            class="img-fluid" />
-                        <h3>Gopi Pizza</h3>
-                        <p>&#8377;450</p>
-                    </div>
-
-                    <div class="team-back text-center" style="margin-top:30px;">
-                        <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-primary">Add To Favourite</a>
-                        </div>
-                        <div class="footer text-center" style="padding-top:5px;">
-                            <a href="#" class="btn btn-danger">Add To Card</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--team-4-->
+            <!--team-1-->
         </div>
     </div>
 </section>

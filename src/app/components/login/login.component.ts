@@ -39,15 +39,15 @@ export class LoginComponent implements OnInit {
       // tslint:disable-next-line: deprecation
       this.foodService.checkLogin(postObj).subscribe(user => {
         console.log(user);
-        // if (user) {
-        //   const userDetails = {
-        //     customerName: user.customerName,
-        //     customerId: user.customerId
-        //   };
-        //   this.router.navigate(['/pizza']);
-        //   sessionStorage.setItem('currentUser', JSON.stringify(userDetails));
-        //   this.loader = false;
-        // }
+        if (user) {
+          const userDetails = {
+            customerName: user.customerName,
+            customerId: user.customerId
+          };
+          this.router.navigate(['/pizza']);
+          sessionStorage.setItem('currentUser', JSON.stringify(userDetails));
+          this.loader = false;
+        }
       }, error => {
         this.loader = false;
       });
