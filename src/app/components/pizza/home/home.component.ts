@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit {
   allItems = true;
   items;
   cartItems = [];
+  addPreferences = {};
+  customerid: number;
+  mypreference;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -27,11 +30,22 @@ export class HomeComponent implements OnInit {
   showAllItems() {
     this.allItems = true;
     this.favouriteItems = false;
+    this.getAllItems();
   }
 
   showFavourites() {
     this.allItems = false;
     this.favouriteItems = true;
+    this.loader = true;
+    this.foodService.viewPreference(this.customerid).subscribe(res => {
+      console.log(res);
+      this.loader = false;
+      this.mypreference = res;     
+
+    },
+      error => {
+        this.loader = false;
+      });
   }
 
   getAllItems() {
@@ -39,19 +53,42 @@ export class HomeComponent implements OnInit {
     this.foodService.getAllItems().subscribe(res => {
       console.log(res);
       this.loader = false;
-      this.allItemList = res.itemList;
+      this.allItemList = (res.length) ? res : res.itemDetails;
     },
       error => {
         this.loader = false;
       });
   }
 
-  showConfirm() {
+  showConfirm(fav, item) {
+    this.addPreferences = {
+      itemId: item,
+      preference: fav
+    };
     this.messageService.clear();
-    this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure want to add favourite?', detail: 'Confirm to proceed' });
+    // alert(fav);
+    if (fav) {
+      this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure want to remove favourite?', detail: 'Confirm to proceed' });
+    } else {
+      this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure want to add favourite?', detail: 'Confirm to proceed' });
+    }
   }
   onConfirm() {
     this.messageService.clear('c');
+    this.foodService.addPreference(this.addPreferences, this.customerid).subscribe(res => {
+      console.log(res);
+      this.loader = false;
+      this.allItemList = res.itemDetails;
+      this.getAllItems();
+      Swal.fire(
+        'Good job!',
+        'Favourite Changed Successfully',
+        'success'
+      );
+    },
+      error => {
+        this.loader = false;
+      });
   }
 
   onReject() {
@@ -63,15 +100,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.items = [
-      {
-        itemId: 1,
-        itemName: 'Panner Pizza',
-        price: 200,
-        favourite: true,
-        category: 'Non Veg'
-      }
-    ];
+    this.getAllItems();
+    this.customerid = JSON.parse(sessionStorage.getItem('currentUser')).customerId;
   }
 
 
@@ -80,7 +110,7 @@ export class HomeComponent implements OnInit {
     this.cartItems.push(item);
     console.log(this.cartItems);
   }
-  myCart(){
+  myCart() {
     sessionStorage.setItem('sessionCart', JSON.stringify(this.cartItems));
     this.router.navigate(['/pizza/cart']);
 
